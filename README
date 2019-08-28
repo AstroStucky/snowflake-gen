@@ -1,0 +1,15 @@
+=== Requirements ===
+g++ 5.0 or higher
+GNU Make
+
+=== How to compile ===
+Just run the make command in the same directory as this README.
+It should have generated an executable "snowflakes" file.
+
+=== How to Run ===
+Use ./snowflakes --help to see arguments.
+Running just the commands without arguments will geneate the default snowflake.
+
+Since visualization is currently done by outputing a large amount of characters to
+stdin, if you plan to view output in a terminal window, it is recommended that 
+you zoom out several times to view the resultsing snowflakes without line warps.
