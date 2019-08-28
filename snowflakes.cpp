@@ -34,25 +34,24 @@
 static bool g_debug;
 
 void show_usage(void) {
-	std::cout<<"./snowflakes [-h -d DIFFUSION_RATE -l VAPOR_LEVEL -a VAPOR_ADDITION_RATE]"        << std::endl;
+	std::cout<<"./snowflakes [-h -v ARGS ...]"                                                    << std::endl;
 	std::cout<<"\t-h --help         Show this message."                                           << std::endl;
 	std::cout<<"\t-v --verbose      Display execution times for each cycle."                      << std::endl;
 	std::cout<<"\t-d --diffusion    Rate with which water vapor diffuses through cells."          << std::endl;
 	std::cout<<"\t-l --vapor_level  Background vapor level all cell initialize at."               << std::endl;
 	std::cout<<"\t-a --add_rate     Rate at which external vapor is added to each receptive cell" << std::endl;
 	std::cout<<"\t-i --init_value   Starting vapor level of the central point in the grid."       << std::endl;
+	std::cout<<"\t-n --iterations   Number of iterations."       << std::endl;
 }
 
 int main(int argc, char* argv[]) {
-	
 	// default argument values
-
 	g_debug = false;
 	float diffusion   = 2.69;
 	float vapor_level = 0.4;
 	float add_rate    = 0.0001;
 	float init_value  = 1.0;
-
+	float iterations  = 150;
 
 	// parse arguments
 	for (int i = 1; i < argc; ++i) {  
@@ -73,6 +72,8 @@ int main(int argc, char* argv[]) {
 				add_rate = std::stof(argv[++i]);
 			} else if (std::strcmp(argv[i], "-i") == 0 || std::strcmp(argv[i], "--init_value") == 0) {                 
 				init_value = std::stof(argv[++i]);
+			} else if (std::strcmp(argv[i], "-n") == 0 || std::strcmp(argv[i], "--iterations") == 0) {                 
+				iterations = std::stof(argv[++i]);
 			}
 		}
 	}
@@ -88,7 +89,7 @@ int main(int argc, char* argv[]) {
 	// print hexagonal grid initial conditions
 	grid.print();
 
-	for (int i = 0; i < 150; i++ ) {
+	for (int i = 0; i < iterations; ++i) {
 		// Record start time
 		auto start = std::chrono::high_resolution_clock::now();
 		grid.process_all();

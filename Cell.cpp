@@ -57,8 +57,8 @@ void Cell::process_rules(void) {
 	// diffuse over all non-frozen cells
 	if (!is_frozen()) {
 		const float alpha = env->get_diffusion_rate();
-		const float avg_u = compute_avg_u();
-		u1 = u0 + alpha*(avg_u - u0)/2.0;
+		const float u0_avg = compute_avg_u();
+		u1 = u0 + alpha/2.0 * (u0_avg - u0);
 	}
 
 	// add total water
