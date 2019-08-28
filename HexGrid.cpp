@@ -55,9 +55,12 @@ void HexGrid::print(size_t spacing) {
 		vertical_ws<<std::endl;
 		horizontal_ws<<" ";
 	}
-
 	for (size_t i = 0; i < Q_NUM; ++i) {
 		std::cout<<vertical_ws.str();
+		// offset every other row
+		if (i % 2 == 0) {
+			std::cout<<horizontal_ws.str();
+		}
 		for (size_t j = 0; j < R_NUM; ++j) {
 			std::cout<<horizontal_ws.str();
 			if (grid[i][j].is_frozen()) {

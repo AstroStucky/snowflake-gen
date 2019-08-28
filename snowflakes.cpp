@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 
 	if (DEBUG) grid.print();
 
-	for (int i = 0; i < 100; i++ ) {
+	for (int i = 0; i < 200; i++ ) {
 		// Record start time
 		auto start = std::chrono::high_resolution_clock::now();
 		grid.process_all();

@@ -9,8 +9,8 @@
 template <class T, size_t X, size_t Y>
 	using Array2D = std::array<std::array<T,Y>, X>;
 
-static const size_t Q_NUM = 80;
-static const size_t R_NUM = 80;
+static const size_t Q_NUM = 250;
+static const size_t R_NUM = 250;
 
 //// HexGrid
 // Manages a 2D array of Cells arranged by (q,r) in a hexagonal grid 
