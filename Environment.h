@@ -52,4 +52,7 @@ private:
 	float gamma;
 };
 
+// global environment: settings can be overwritten by calling it directly
+extern Environment g_environment;
+
 #endif /* ENVIRONMENT_H */
