@@ -1,12 +1,11 @@
 #ifndef CELL_H
 #define CELL_H
 
+#include <set>
+
 #include "Environment.h"
 
 #define ICE_THRESHOLD	1.0f
-
-// global environment: settings can be overwritten by calling it directly
-Envrionment g_environment;
 
 class Cell {
 public:
@@ -14,7 +13,7 @@ public:
 	Cell();
 
 	// process_rules to determine next state
-	void process_rules(const float avg_u);
+	void process_rules(void);
 
 	// transitions future frame values to current frame values and modifies 
 	// cell state variables
@@ -30,9 +29,9 @@ public:
 		return receptive;
 	}
 	// boundary cells are those at the edge of a grid and are kept at a
-	// constant vapor level
+	// constant vapor leve
 	bool is_boundary_cell(void) const {
-		return boundary
+		return boundary;
 	}
 	float get_diffusive_water_level() {
 		return u0;
@@ -48,10 +47,25 @@ public:
 	// sets water content of the cell
 	void set_water_content(const float water_content);
 
+	// add a pointer to a cell that is adjacent to this cell
+	void add_adjacent(Cell* const cell) {
+		adjacents.insert(cell);
+	}
+
+protected:
+	// computes the average u value of all adjacent cells
+	float compute_avg_u(void);
+
+	// determines if an adjacent cell is frozen
+	bool has_frozen_neighbor(void);
+
 private:
 
 	// provides shared access to environmental constants
 	Environment *env;
+
+	// pointers to all adjacent cells
+	std::set<Cell*> adjacents;
 
 	/// Cell state variables
 	// frozen cells have values s > ICE_THRESHOLD
@@ -68,7 +82,7 @@ private:
 	// amount of water participating in diffusion
 	float u0, u1;
 	// amount of water not participating in diffusion
-	float z0, z1;
-}
+	float v0, v1;
+};
 
 #endif /* CELL_H */

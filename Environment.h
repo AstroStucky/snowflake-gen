@@ -1,7 +1,5 @@
-#ifndef ENVRIONMENT_H
-#define ENVRIONMENT_H
-
-#include <math>
+#ifndef ENVIRONMENT_H
+#define ENVIRONMENT_H
 
 #define DEFAULT_DIFFUSION_RATE	1.0f
 #define DEFAULT_VAPOR_LEVEL 	0.4f
@@ -9,8 +7,8 @@
 
 class Environment {
 public: 
-	Envrionment() : alpha(DEFAULT_DIFFUSION_RATE), beta(DEFAULT_VAPOR_LEVEL), gamma(DEFAULT_ADDITION_RATE) {
-		// do nothing
+	Environment() : alpha(DEFAULT_DIFFUSION_RATE), beta(DEFAULT_VAPOR_LEVEL), gamma(DEFAULT_ADDITION_RATE) {
+		// do nothing;
 	}
 	
 	Environment(float diffusion_rate, float vapor_level, float addition_rate ) : alpha(diffusion_rate), beta(diffusion_rate), gamma(addition_rate) {
@@ -50,6 +48,6 @@ private:
 	// boundary cells. Can be thought of as the flow of vapor in the 3rd
 	// dimension
 	float gamma;
-}
+};
 
 #endif /* ENVIRONMENT_H */

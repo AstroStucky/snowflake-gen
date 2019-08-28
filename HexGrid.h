@@ -5,8 +5,11 @@
 
 #include "Cell.h"
 
-#define CELL_GRID_MAX_Q 400
-#define CELL_GRID_MAX_R 400
+template <class T, size_t X, size_t Y>
+	using Array2D = std::array<std::array<T,Y>, X>;
+
+static const size_t MAX_Q = 20;
+static const size_t MAX_R = 20;
 
 /// HexGrid
 // Manages a 2D array of Cells by (q,r) hexagonal grid coordinates, where q_hat
@@ -17,31 +20,21 @@
 // 6-fold symmetry.
 class HexGrid {
 public:
-	HexGrid() = 0;
-
+	// construct hexgrid with an initial value to assign to center cell
 	HexGrid(const float intial_condition);
 
+	// no default constructor
+	HexGrid() = delete;
+
 	// processes automata rules of every cell in grid
-	float process_all(void);
+	void process_all(void);
 
-protected:
-	// computes the average value of all cells adjacent to (q,r)
-	// NOTE: The Grid computes the local average instead of the Cell because: 
-	// 		a) It has direct access to the grid member variables.
-	//      b) The average is dependent on nearest neighbors, and therefore
-	//      is dependent on the geometry of grid space. If Cell were dependent 
-	//      on the geometry of grid space, a new Cell class would have to be 
-	//      constructed for each type of grid space (e.g. square grids)
-	float compute_local_avg_u(const int q, const int r) const;
-
-	// returns true if there exist a neighbor to Cell (q,r) that is frozen
-	bool has_frozen_locals(const int q, const int r) const;
+	// output grid in text format
+	void print(void);
 
 private:
-
 	// all cells organized by their (q,r) coordinate
-	Array2D<Cell,CELL_GRID_MAX_Q,CELL_GRID_MAX_R> grid;
-
-}
+	Array2D<Cell,MAX_Q,MAX_R> grid;
+};
 
 #endif /* HEX_GRID_H */
