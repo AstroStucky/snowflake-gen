@@ -1,5 +1,10 @@
 #include "Cell.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <GL/glut.h>  // GLUT, include glu.h and gl.h
+
 // global environment: settings can be overwritten by calling it directly
 Environment g_environment;
 

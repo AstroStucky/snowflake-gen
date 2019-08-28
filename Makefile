@@ -1,5 +1,6 @@
 CXX=g++
 CXX_FLAGS=-std=c++11 -g -Wall
+LIB=-lGL -lglut
 
 snowflakes: obj/snowflakes.o obj/Cell.o obj/HexGrid.o
 	$(CXX) $(CXX_FLAGS) -o $@ $^ $(LIB)
