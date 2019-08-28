@@ -1,5 +1,12 @@
+#include <iostream>
 
+#include "HexGrid.h"
 
-int main( void ) {
+void show_usage(void) {
+	std::cout<<""<<std::endl;
+}
+
+int main(int argc, char* argv[]) {
+
 
 }

@@ -3,36 +3,52 @@
 
 #include "Environment.h"
 
+#define ICE_THRESHOLD	1.0f
+
+// global environment: settings can be overwritten by calling it directly
+Envrionment g_environment;
+
 class Cell {
 public:
-	Cell() = 0;
-
+	// uses the global environment 
 	Cell();
 
-	bool check_for_surrounding_ice() const;
+	// process_rules to determine next state
+	void process_rules(const float avg_u);
 
-	float compute_local_average_u() const;
+	// transitions future frame values to current frame values and modifies 
+	// cell state variables
+	void update_state(void);
 
-	// Update vapor state variables based on adjacent cells
-	void process(void);
-
-	/// Cell state accessors
+	//// Accessors
+	// A frozen cell has a total water content greater than the ice threshold
 	bool is_frozen(void) const {
 		return frozen;
 	}
+	// A receptive cell is one that is frozen, or adjacent to a frozen cell
 	bool is_receptive(void) const {
 		return receptive;
 	}
-	bool is_boundary(void) const {
+	// boundary cells are those at the edge of a grid and are kept at a
+	// constant vapor level
+	bool is_boundary_cell(void) const {
 		return boundary
 	}
+	float get_diffusive_water_level() {
+		return u0;
+	}
 
-	// accessor for water participating in diffusion
-	float get_u();
+	//// Modifiers
+	void set_boundary_cell(const bool is_boundary_cell) {
+		boundary = is_boundary_cell;
+	}	
+	void set_environment(Environment* environment) {
+		env = environment;
+	}
+	// sets water content of the cell
+	void set_water_content(const float water_content);
 
 private:
-
-	const float ICE_THRESHOLD = 1.0;
 
 	// provides shared access to environmental constants
 	Environment *env;
@@ -46,13 +62,13 @@ private:
 	// background vapor level
 	bool boundary;
 
+	/// s0, u0, z0 are all current values and s1, u1, z1, next frame values
 	// total amount water content in the cell
-	float s;
+	float s0, s1;
 	// amount of water participating in diffusion
-	float u;
+	float u0, u1;
 	// amount of water not participating in diffusion
-	float z;
-
+	float z0, z1;
 }
 
 #endif /* CELL_H */
