@@ -14,8 +14,7 @@ public:
 
 	// process_rules to determine next state
 	void process_rules(void);
-
-	// transitions future frame values to current frame values and modifies 
+	// transitions future frame values to current frame values and updates 
 	// cell state variables
 	void update_state(void);
 
@@ -56,8 +55,13 @@ protected:
 	// computes the average u value of all adjacent cells
 	float compute_avg_u(void);
 
-	// determines if an adjacent cell is frozen
-	bool has_frozen_neighbor(void);
+	// internal only accessors and modifiers
+	float get_u0(void) {
+		return u0;
+	}
+	void set_receptive(const bool is_receptive) {
+		receptive = is_receptive;		
+	}
 
 private:
 
@@ -78,11 +82,12 @@ private:
 
 	/// s0, u0, z0 are all current values and s1, u1, z1, next frame values
 	// total amount water content in the cell
-	float s0, s1;
-	// amount of water participating in diffusion
-	float u0, u1;
+	float s;
 	// amount of water not participating in diffusion
-	float v0, v1;
+	float v;
+	// amount of water participating in diffusion
+	// u0 - current value, u1 - future value
+	float u0, u1;
 };
 
 #endif /* CELL_H */

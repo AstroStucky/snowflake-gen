@@ -1,17 +1,19 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
-#define DEFAULT_DIFFUSION_RATE	1.0f
+#define DEFAULT_DIFFUSION_RATE 	2.69f
 #define DEFAULT_VAPOR_LEVEL 	0.4f
 #define DEFAULT_ADDITION_RATE	0.0001f	
 
 class Environment {
 public: 
-	Environment() : alpha(DEFAULT_DIFFUSION_RATE), beta(DEFAULT_VAPOR_LEVEL), gamma(DEFAULT_ADDITION_RATE) {
+	Environment() : alpha(DEFAULT_DIFFUSION_RATE), beta(DEFAULT_VAPOR_LEVEL), 
+			gamma(DEFAULT_ADDITION_RATE) {
 		// do nothing;
 	}
 	
-	Environment(float diffusion_rate, float vapor_level, float addition_rate ) : alpha(diffusion_rate), beta(diffusion_rate), gamma(addition_rate) {
+	Environment(float diffusion_rate, float vapor_level, float addition_rate ) 
+			: alpha(diffusion_rate), beta(diffusion_rate), gamma(addition_rate) {
 		// do nothing
 	}
 
@@ -38,7 +40,7 @@ public:
 	}
 
 private:
-	/// Vapor constants
+	//// Water environment constants
 	// diffusion rate: rate at which water diffuses through the Grid
 	float alpha;
 	// background vapor level: all cells initialize at this value, and boundary
