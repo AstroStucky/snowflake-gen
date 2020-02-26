@@ -12,4 +12,11 @@ Running just the commands without arguments will geneate the default snowflake.
 
 Since visualization is currently done by outputing a large amount of characters to
 stdin, if you plan to view output in a terminal window, it is recommended that 
-you zoom out several times to view the resultsing snowflakes without line warps.
+you zoom out several times to view the resultsing snowflakes without line wraps.
+
+== Example snowflakes == 
+Here are a few pretty examples to start exploring the snowflake parameter space.
+
+./snowflakes -l 0.1 -a 0.0001 -d 1.0 -n 1200
+./snowflakes -l 0.1 -a 0.0 -d 1.0 -n 800
+./snowflakes -l 0.2 -a 0.0001 -d 1.0 -n 400
